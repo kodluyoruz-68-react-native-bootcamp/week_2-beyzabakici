@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, Text, FlatList, StyleSheet, Dimensions, Image } from 'react-native';
-import { InputContainer } from './components';
+import { InputContainer, ToDoCard } from './components';
 
 /**
  * TextInput: testID="input" (component which is user types the todo text)
@@ -9,9 +9,22 @@ import { InputContainer } from './components';
  */
 
 function App() {
-  const [toDoList, setToDoList] = useState(['']);
+  const [toDoList, setToDoList] = useState([]);
 
+  const deleteToDo = (key) => {
+    setToDoList((prevToDoList) => {
+      return prevToDoList.filter(todo => todo.key != key)
+    });
+  }
 
+  const renderToDoCard = (obj) => (
+    <ToDoCard item={obj.item} deleteToDo={deleteToDo}/>
+
+  );
+
+  const addToDo = (val) => {
+    setToDoList([{ text: val, key: Math.random().toString(), isDisable: false }, ...toDoList]);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,10 +36,17 @@ function App() {
           />
           <Text style={styles.label}>TO DO LIST</Text>
         </View>
-        <FlatList
 
+        <FlatList
+          keyExtractor={(item, index) => item.key.toString()}
+          data={toDoList}
+          renderItem={renderToDoCard}
         />
-        <InputContainer setWord={(word) => setToDoList(word)} />
+
+        <InputContainer
+          onSend={(val) => addToDo(val)}
+        />
+
       </View>
     </SafeAreaView>
 
@@ -41,8 +61,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFE7D6'
   },
 
-  logoContainer:{
-    flexDirection:'row',
+  logoContainer: {
+    flexDirection: 'row',
     alignItems: 'center'
   },
 
@@ -51,7 +71,7 @@ const styles = StyleSheet.create({
     width: 40,
     tintColor: '#89b0ae',
     margin: 10,
-    
+
   },
 
   label: {

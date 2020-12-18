@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, Dimensions, View, Image } from 'react-native';
 
 function InputContainer(props) {
-    const [word, setWord] = useState(['']);
+    const [todo, setTodo] = useState(['']);
     return (
         <View style={styles.container} >
             <TextInput
                 style={styles.input}
                 placeholder='text gir..'
-                onChangeText={(text) => setWord(text)}
+                onChangeText={(text) => setTodo(text)}
             />
-            {console.log('burasi input ' + word)}
-            <TouchableOpacity style={styles.cartButtonContainer} onPress={props.setWord}>
+            
+            <TouchableOpacity 
+                style={styles.cartButtonContainer} 
+                onPress={() => props.onSend(todo)}
+                >
                 <Image
                     source={require('../assets/upArrow.png')}
                     style={styles.button}
