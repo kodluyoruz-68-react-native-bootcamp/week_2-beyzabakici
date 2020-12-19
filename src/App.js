@@ -18,12 +18,17 @@ function App() {
   }
 
   const renderToDoCard = (obj) => (
-    <ToDoCard item={obj.item} deleteToDo={deleteToDo}/>
+    <ToDoCard item={obj.item} deleteToDo={deleteToDo} onChange={onChange}/>
 
   );
 
   const addToDo = (val) => {
-    setToDoList([{ text: val, key: Math.random().toString(), isDisable: false }, ...toDoList]);
+    setToDoList([{ text: val, key: Math.random().toString(), isDone: false }, ...toDoList]);
+  };
+
+  const onChange = (itemKey) => {
+    var newList = toDoList.map((todo) => todo.key === itemKey ? {...todo, isDone:!todo.isDone}:todo);
+    setToDoList(newList);
   };
 
   return (
@@ -38,9 +43,11 @@ function App() {
         </View>
 
         <FlatList
+          testID="list"
           keyExtractor={(item, index) => item.key.toString()}
           data={toDoList}
-          renderItem={renderToDoCard}
+          renderItem={renderToDoCard }
+          
         />
 
         <InputContainer
