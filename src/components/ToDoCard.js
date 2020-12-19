@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { CurrentDate } from './CurrentDate';
 
 function ToDoCard({item, deleteToDo, onChange} ) {
-    
+
     return (
         <TouchableOpacity style={
             item.isDone ? [styles.container, styles.disableContainer] : styles.container 
@@ -12,6 +13,7 @@ function ToDoCard({item, deleteToDo, onChange} ) {
             
         >
             { <Text style={styles.text}>{item.text}</Text> } 
+            { <CurrentDate style={styles.dateContainer}/>}
         </TouchableOpacity>
 
     );
@@ -24,10 +26,15 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         borderRadius: 20,
+        flexDirection: 'row',
+        justifyContent:'space-between'
     },
 
     disableContainer: {
-        backgroundColor: '#f19c79',
+        backgroundColor: '#FFE7D6',
+        borderColor: '#83c5be',
+        borderStyle: 'dashed',
+        borderWidth: 3,
         
     },
 
@@ -37,7 +44,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    dateTime: {
+    dateContainer: {
 
     }
 });

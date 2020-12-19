@@ -51,7 +51,12 @@ function App() {
         />
 
         <InputContainer
-          onSend={(val) => addToDo(val)}
+          onSend={(val) => {
+            if(val.length){
+              addToDo(val)
+            }
+            }
+          }
         />
 
       </View>
