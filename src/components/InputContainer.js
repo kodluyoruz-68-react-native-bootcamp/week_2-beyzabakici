@@ -2,36 +2,29 @@ import React, { useState } from 'react';
 import { StyleSheet, TextInput, TouchableOpacity, Dimensions, View, Image } from 'react-native';
 
 function InputContainer(props) {
-	const [todo, setTodo] = useState([]);
+	const [todo, setTodo] = useState('');
 	return (
 		<View style={styles.container} >
 			<TextInput
 				testID="input"
 				style={styles.input}
 				placeholder='text gir..'
-				onChangeText={(text) => { setTodo(text)}}
-				 
+				onChangeText={(text) => { setTodo(text) }}
+				value={todo}
 			/>
-
 			<TouchableOpacity
 				testID="button"
 				style={styles.cartButtonContainer}
 				onPress={() => {
-						props.onSend(todo);
-						console.log(todo)
-						
-
+					props.onSend(todo);
 				}}
 			>
 				<Image
 					source={require('../assets/upArrow.png')}
 					style={styles.button}
 				/>
-
 			</TouchableOpacity>
 		</View>
-
-
 	);
 }
 

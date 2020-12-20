@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     disableContainer: {
         backgroundColor: '#FFE7D6',
         borderColor: '#83c5be',
-        borderStyle: 'dashed',
-        borderWidth: 3,
+        borderStyle: 'dotted',
+        borderWidth: 2,
         
     },
 
@@ -43,10 +43,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
     },
-
-    dateContainer: {
-
-    }
 });
 
 export { ToDoCard };

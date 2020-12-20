@@ -35,12 +35,18 @@ function App() {
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.logoContainer}>
+          <View style={styles.title}>
+
           <Image
             style={styles.logo}
             source={require('./assets/todo.png')}
-          />
+            />
           <Text style={styles.label}>TO DO LIST</Text>
+          </View>
+          <Text style={styles.counter}>{toDoList.length? toDoList.length : null}</Text>
         </View>
+        <View>
+
 
         <FlatList
           testID="list"
@@ -48,18 +54,18 @@ function App() {
           data={toDoList}
           renderItem={renderToDoCard }
           
-        />
+          />
 
+        </View>
         <InputContainer
           onSend={(val) => {
-            if(val.length){
+            if (val.length){
               addToDo(val)
             }
-            }
           }
+        }
         />
-
-      </View>
+        </View>
     </SafeAreaView>
 
   );
@@ -75,21 +81,32 @@ const styles = StyleSheet.create({
 
   logoContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    justifyContent: 'space-between',
+    alignItems:'center'
+  },
+
+  title:{
+    flexDirection:'row',
   },
 
   logo: {
     height: 40,
     width: 40,
-    tintColor: '#89b0ae',
+    tintColor: '#555b6e',
     margin: 10,
-
   },
 
   label: {
     fontSize: 40,
     fontWeight: 'bold',
     color: '#555b6e'
+  },
+
+  counter:{
+    fontSize: 24,
+    fontWeight: 'bold', 
+    color: '#81b29a',
+    marginRight: 20
   }
 });
 
